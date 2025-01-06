@@ -12,7 +12,10 @@ const rideRoutes = require('./routes/ride.routes');
 
 conncetToDb();
 
-app.use(cors());
+app.use(cors({
+    origin: "https://uber-clone-srihari-mittapallys-projects.vercel.app", // Replace with the actual frontend URL
+    credentials: true, 
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
