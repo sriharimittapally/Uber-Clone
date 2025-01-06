@@ -12,10 +12,24 @@ const rideRoutes = require('./routes/ride.routes');
 
 conncetToDb();
 
-app.use(cors({
-    origin: "https://uber-clone-srihari-mittapallys-projects.vercel.app", // Replace with the actual frontend URL
-    credentials: true, 
-}));
+
+const allowedOrigins = [
+    'http://localhost:5173',  // Your local frontend
+    'https://uber-clone-srihari-mittapallys-projects.vercel.app'  // Your deployed frontend
+  ];
+const corsOptions = {
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true  // Enable cookies and credentials
+  };
+  
+app.use(cors(corsOptions));
+  
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
