@@ -7,6 +7,10 @@ const server = http.createServer(app);
 
 initializeSocket(server);
 
+app.get('/' ,(req, res)=>{
+  res.send("I am Backend");
+})
+
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
